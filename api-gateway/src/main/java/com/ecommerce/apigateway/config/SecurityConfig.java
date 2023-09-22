@@ -13,22 +13,22 @@ public class SecurityConfig {
 
     @Bean
     public SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity serverHttpSecurity) {
-        serverHttpSecurity
-                .authorizeExchange((authz) -> authz
-                        .pathMatchers("/eureka/**").permitAll()
-                        .pathMatchers("/api/product").permitAll()
-                        .anyExchange().denyAll()
-
-
-                );
 //        serverHttpSecurity
-//                .csrf().disable()
-//                .authorizeExchange(exchange ->
-//                        exchange.pathMatchers("/eureka/**")
-//                                .permitAll());
-//                                .anyExchange()
-//                                .authenticated());
-//                .oauth2ResourceServer(ServerHttpSecurity.OAuth2ResourceServerSpec::jwt);
+//                .authorizeExchange((authz) -> authz
+//                        .pathMatchers("/eureka/**").permitAll()
+//                        .pathMatchers("/api/product").permitAll()
+//                        .anyExchange().denyAll()
+//
+//
+//                );
+        serverHttpSecurity
+                .csrf().disable()
+                .authorizeExchange(exchange ->
+                        exchange.pathMatchers("/eureka/**")
+                                .permitAll()
+                                .anyExchange()
+                                .authenticated())
+                .oauth2ResourceServer(ServerHttpSecurity.OAuth2ResourceServerSpec::jwt);
         return serverHttpSecurity.build();
     }
 }
