@@ -55,7 +55,7 @@ public class OrderService {
         return inventoryServiceObservation.observe(() -> {
             log.info("3.Inventory: call api check in stock");
             InventoryResponse[] inventoryResponseArray = webClientBuilder.build().get()
-                    .uri("http://localhost:8082/api/inventory",
+                    .uri("http://inventory-service/api/inventory",
                             uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                     .retrieve()
                     .bodyToMono(InventoryResponse[].class)
@@ -68,7 +68,7 @@ public class OrderService {
             if (allProductsInStock) {
                 orderRepository.save(order);
                 // publish Order Placed Event
-                applicationEventPublisher.publishEvent(new OrderPlacedEvent(this, order.getOrderNumber()));
+//                applicationEventPublisher.publishEvent(new OrderPlacedEvent(this, order.getOrderNumber()));
                 return "Order Placed";
             } else {
                 throw new IllegalArgumentException("Product is not in stock, please try again later");
