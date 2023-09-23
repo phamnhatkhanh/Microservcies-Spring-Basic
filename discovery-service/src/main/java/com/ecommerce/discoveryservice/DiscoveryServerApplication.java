@@ -16,13 +16,4 @@ public class DiscoveryServerApplication {
         SpringApplication.run(DiscoveryServerApplication.class, args);
     }
 
-
-    @Bean
-    @SuppressWarnings("deprecation")
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((authz) -> authz.anyRequest().authenticated())
-                .httpBasic(withDefaults());
-        http.csrf().ignoringRequestMatchers("/eureka/**");
-        return http.build();
-    }
 }
