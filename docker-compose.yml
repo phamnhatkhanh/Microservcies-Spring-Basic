@@ -107,80 +107,80 @@ services:
     ports:
       - "9411:9411"
 
-  # ## Eureka Server
-  # discovery-server:
-  #   image: phamnhatkhanh/discovery-service:latest
-  #   container_name: discovery-server
-  #   ports:
-  #     - "8761:8761"
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=docker
-  #   depends_on:
-  #     - zipkin
+  ## Eureka Server
+  discovery-server:
+    image: phamnhatkhanh/microservices-sping-learning_discovery-service:latest
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
 
-  # api-gateway:
-  #   image: phamnhatkhanh/api-gateway:latest
-  #   container_name: api-gateway
-  #   ports:
-  #     - "8181:8080"
-  #   expose:
-  #     - "8181"
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=docker
-  #     - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY= TRACE
-  #   depends_on:
-  #     - zipkin
-  #     - discovery-server
-  #     - keycloak
+  api-gateway:
+    image: phamnhatkhanh/microservices-sping-learning_api-gateway:latest
+    container_name: api-gateway
+    ports:
+      - "8181:8080"
+    expose:
+      - "8181"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY= TRACE
+    depends_on:
+      - zipkin
+      - discovery-server
+      - keycloak
 
-  # ## Product-Service Docker Compose Config
-  # product-service:
-  #   container_name: product-service
-  #   image: phamnhatkhanh/product-service:latest
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=docker
-  #   depends_on:
-  #     - mongo
-  #     - discovery-server
-  #     - api-gateway
+  ## Product-Service Docker Compose Config
+  product-service:
+    container_name: product-service
+    image: phamnhatkhanh/microservices-sping-learning_product-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - discovery-server
+      - api-gateway
 
-  # ## Order-Service Docker Compose Config
-  # order-service:
-  #   container_name: order-service
-  #   image: phamnhatkhanh/order-service:latest
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=docker
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-order:5431/order-service
-  #   depends_on:
-  #     - postgres-order
-  #     - broker
-  #     - zipkin
-  #     - discovery-server
-  #     - api-gateway
+  ## Order-Service Docker Compose Config
+  order-service:
+    container_name: order-service
+    image: phamnhatkhanh/microservices-sping-learning_order-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-order:5431/order-service
+    depends_on:
+      - postgres-order
+      - broker
+      - zipkin
+      - discovery-server
+      - api-gateway
 
-  # ## Inventory-Service Docker Compose Config
-  # inventory-service:
-  #   container_name: inventory-service
-  #   image: phamnhatkhanh/inventory-service:latest
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=docker
-  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/inventory-service
-  #   depends_on:
-  #     - postgres-inventory
-  #     - discovery-server
-  #     - api-gateway
+  ## Inventory-Service Docker Compose Config
+  inventory-service:
+    container_name: inventory-service
+    image: phamnhatkhanh/microservices-sping-learning_inventory-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/inventory-service
+    depends_on:
+      - postgres-inventory
+      - discovery-server
+      - api-gateway
 
-  # ## Notification-Service Docker Compose Config
-  # notification-service:
-  #   container_name: notification-service
-  #   image: phamnhatkhanh/notification-service:latest
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=docker
-  #   depends_on:
-  #     - zipkin
-  #     - broker
-  #     - discovery-server
-  #     - api-gateway
+  ## Notification-Service Docker Compose Config
+  notification-service:
+    container_name: notification-service
+    image: phamnhatkhanh/microservices-sping-learning_notification-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      - broker
+      - discovery-server
+      - api-gateway
 
 #     Prometheus
   prometheus:
@@ -191,11 +191,11 @@ services:
       - "9090:9090"
     volumes:
       - ./volumes/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-#    depends_on:
-#      - product-service
-#      - inventory-service
-#      - order-service
-#      - notification-service
+   depends_on:
+     - product-service
+     - inventory-service
+     - order-service
+     - notification-service
 
   grafana:
     image: grafana/grafana-oss:8.5.2
