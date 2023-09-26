@@ -23,13 +23,16 @@ public class OrderPlacedEventListener {
 
     @EventListener
     public void handleOrderPlacedEvent(OrderPlacedEvent event) {
-        log.info("Order Placed Event Received, Sending OrderPlacedEvent to notificationTopic: {}", event.getOrderNumber());
+
 
         // Create Observation for Kafka Template
         try {
+            log.info("Order Placed Event Received, Sending OrderPlacedEvent to notificationTopic: {}", event.getOrderNumber());
             Observation.createNotStarted("notification-topic", this.observationRegistry).observeChecked(() -> {
+                log.info("_Kafka: order serivice perpare send event" );
                 CompletableFuture<SendResult<String, OrderPlacedEvent>> future = kafkaTemplate.send("notificationTopic",
                         new OrderPlacedEvent(event.getOrderNumber()));
+                log.info("_Kafka: send event" );
                 return future.handle((result, throwable) -> CompletableFuture.completedFuture(result));
             }).get();
         } catch (InterruptedException | ExecutionException e) {
