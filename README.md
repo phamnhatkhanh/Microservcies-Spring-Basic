@@ -20,7 +20,6 @@
   - [Services](#services)
 - [Plan](#plan)
 - [Application Architecture](#application-architecture)
-- [Prerequisites](#prerequisites)
 - [Setup](#setup)
 - [Demo](#demo)
 - [Resource](#resource)
