@@ -1,3 +1,4 @@
+# Spring-Microservcies-Learning
 # 🛍️ ECommerece Microservices Sample
 
 [![Coverage Status](https://img.shields.io/coverallsCoverage/github/mehdihadeli/ecommerce-microservices?style=for-the-badge&logo=coveralls&label=Code%20Coverage&logoColor=white)](https://coveralls.io/github/mehdihadeli/ecommerce-microservices)
@@ -19,7 +20,6 @@
   - [Services](#services)
 - [Plan](#plan)
 - [Application Architecture](#application-architecture)
-- [Prerequisites](#prerequisites)
 - [Setup](#setup)
 - [Demo](#demo)
 - [Resource](#resource)
@@ -95,6 +95,5 @@
 ## Project References
 
 - [https://www.youtube.com/playlist?list=PLDHSigHSDJWUTBa8r8tvQDQMZbemLBNp4](https://www.youtube.com/playlist?list=PLDHSigHSDJWUTBa8r8tvQDQMZbemLBNp4)
-
 
 
